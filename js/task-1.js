@@ -1,24 +1,28 @@
-/* 
-* Перш, ніж розвязувати задачу, давай визначимося із новим терміном!
+/* Напиши функцію isEnoughCapacity(products, containerSize), яка обчислює, чи помістяться всі товари в контейнер при пакуванні.
 
-* Термін slug — це зрозумілий людині унікальний ідентифікатор, який використовується у веб розробці для створення читабельних URL-адрес.
+Функція оголошує два параметри:
 
-* Наприклад, замість того, щоб користувач побачив в адресному рядку mysite.com/posts/1q8fh74tx, 
-* можна зробити slug із назви статті. У результаті адреса буде приємнішою для сприйняття: mysite.com/posts/arrays-for-beginners.
+products — об’єкт, у якому ключі містять назви товарів, а їхні значення — кількість цих товарів. Наприклад, { apples: 2, grapes: 4 }.
+containerSize — число, максимальна кількість одиниць товарів, яку в себе може вмістити контейнер.
+Функція має повернути результат перевірки, чи помістяться всі товари в контейнер. Тобто порахувати загальну кількість товарів в об’єкті 
+products і повернути true, якщо вона менше або дорівнює containerSize, і false, якщо ні.
+*/
 
-* Slug — це завжди рядок у нижньому регістрі, слова якого розділені тире.
+function isEnoughCapacity(products, containerSize) {
+  let totalProducts = 0;
 
-? Напиши функцію slugify(title), яка приймає заголовок статті, параметр title і повертає slug, створений із цього рядка.
+  const quantities = Object.values(products);
+  for (let i = 0; i < quantities.length; i++) {
+    totalProducts += quantities[i];
+  }
 
-? Значенням параметра title будуть рядки, слова яких розділені лише пробілами.
-? Усі символи slug повинні бути в нижньому регістрі.
-? Усі слова slug повинні бути розділені тире. */
-
-function slugify(title) {
-  return title.toLowerCase().replace(/ /g, '-');
+  return totalProducts <= containerSize;
 }
 
-console.log(slugify('Arrays for beginners')); // "arrays-for-beginners"
-console.log(slugify('English for developer')); // "english-for-developer"
-console.log(slugify('Ten secrets of JavaScript')); // "ten-secrets-of-javascript"
-console.log(slugify('How to become a JUNIOR developer in TWO WEEKS')); // "how-to-become-a-junior-developer-in-two-weeks"
+console.log(isEnoughCapacity({ apples: 2, grapes: 3, carrots: 1 }, 8));
+
+console.log(isEnoughCapacity({ apples: 4, grapes: 6, lime: 16 }, 12));
+
+console.log(isEnoughCapacity({ apples: 1, lime: 5, tomatoes: 3 }, 14));
+
+console.log(isEnoughCapacity({ apples: 18, potatoes: 5, oranges: 2 }, 7));

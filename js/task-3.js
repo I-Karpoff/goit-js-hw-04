@@ -1,26 +1,27 @@
-/* 
-? Напиши функцію filterArray(numbers, value), яка приймає масив чисел (numbers) та значення (value) як параметри. 
-? Функція повинна повертати новий масив лише тих чисел із масиву numbers, які більші за значення value.
+/* Об’єкт profile описує профіль користувача на ігровій платформі. 
+У його властивостях зберігається ім’я профілю username та кількість активних годин playTime, проведених у грі. */
 
-? Створи порожній масив, у який будеш додавати підходящі числа.
-? Використай цикл для ітерації кожного елемента масиву numbers.
-? Використовуй умовний оператор if усередині циклу для перевірки кожного елемента и додавання до свого масиву.
-? Поверни свій новий масив з підходящими числами як результат. */
+const profile = {
+  username: 'Jacob',
+  playTime: 300,
 
-function filterArray(numbers, value) {
-  let num = [];
+  changeUsername(newName) {
+    this.username = newName;
+  },
 
-  for (let i = 0; i < numbers.length; i++) {
-    if (numbers[i] > value) {
-      num.push(numbers[i]);
-    }
-  }
+  updatePlayTime(hours) {
+    this.playTime += hours;
+  },
 
-  return num;
-}
+  getInfo() {
+    return `${this.username} has ${this.playTime} active hours!`;
+  },
+};
 
-console.log(filterArray([1, 2, 3, 4, 5], 3)); // [4, 5]
-console.log(filterArray([1, 2, 3, 4, 5], 4)); // [5]
-console.log(filterArray([1, 2, 3, 4, 5], 5)); // []
-console.log(filterArray([12, 24, 8, 41, 76], 38)); // [41, 76]
-console.log(filterArray([12, 24, 8, 41, 76], 20)); // [24, 41, 76]
+console.log(profile.getInfo()); // "Jacob has 300 active hours!"
+
+profile.changeUsername('Marco');
+console.log(profile.getInfo()); // "Marco has 300 active hours!"
+
+profile.updatePlayTime(20);
+console.log(profile.getInfo()); // "Marco has 320 active hours!"
